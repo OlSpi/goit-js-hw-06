@@ -5,12 +5,14 @@ function getRandomHexColor() {
 }
 const create = document.querySelector("[data-create]");
 const destroy = document.querySelector("[data-destroy]");
-const input = document.querySelector("#controls input");
+const input = document.querySelector("input");
 const boxes = document.querySelector("#boxes");
 
 create.addEventListener("click", addColection);
 
 function addColection(amount) {
+  boxes.innerHTML = "";
+  let elements = [];
   amount = input.value;
   let size = 30;
   for (let i = 0; i < amount; i += 1) {
@@ -18,11 +20,14 @@ function addColection(amount) {
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
-    boxes.append(box);
     size += 10;
+    elements.push(box);
   }
+  boxes.append(...elements);
 }
 destroy.addEventListener("click", deleteColection);
+
 function deleteColection() {
   boxes.innerHTML = "";
+  input.value = "";
 }
